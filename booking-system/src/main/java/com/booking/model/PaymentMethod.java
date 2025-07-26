@@ -1,6 +1,6 @@
 package com.booking.model;
 
-public enum PaymendMethod {
+public enum PaymentMethod {
     CREDIT_CARD,
     PAYPAL,
     CASH

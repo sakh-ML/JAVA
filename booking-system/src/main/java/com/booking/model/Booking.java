@@ -18,7 +18,11 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     User user;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
     Room room;
     LocalDate startDate;
     LocalDate endDate;
@@ -27,4 +31,7 @@ public class Booking {
     BookingStatus status;
     Date createdAt;
     Date updatedAt;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    Payment payment;
 }

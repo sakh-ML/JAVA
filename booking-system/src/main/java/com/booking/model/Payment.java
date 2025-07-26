@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,9 +17,10 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @OneToOne(mappedBy = "payment")
     Booking booking;
     @Enumerated(EnumType.STRING)
-    PaymendMethod paymendMethod;
+    PaymentMethod paymentMethod;
     double amount;
     Date paymentDate;
     boolean paymentStatus;
