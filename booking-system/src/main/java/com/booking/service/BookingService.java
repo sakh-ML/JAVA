@@ -29,7 +29,10 @@ public class BookingService {
     }
 
     public Booking updateBooking(Long id, Booking updatedBooking) {
-        return bookingRepository.findById(id).map(existingBooking -> {
+
+        Optional<Booking> optionalBooking = bookingRepository.findById(id);
+        if (optionalBooking.isPresent()) {
+            Booking existingBooking = optionalBooking.get();
             existingBooking.setUser(updatedBooking.getUser());
             existingBooking.setRoom(updatedBooking.getRoom());
             existingBooking.setStartDate(updatedBooking.getStartDate());
@@ -40,7 +43,9 @@ public class BookingService {
             existingBooking.setCreatedAt(updatedBooking.getCreatedAt());
             existingBooking.setUpdatedAt(updatedBooking.getUpdatedAt());
             return bookingRepository.save(existingBooking);
-        }).orElseThrow(() -> new RuntimeException("Booking not found with id: " + id));
+        } else {
+            throw new RuntimeException("Booking was not found with id: " + id);
+        }
     }
 
     public void deleteBookingById(Long id) {

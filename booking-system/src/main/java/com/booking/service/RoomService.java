@@ -21,7 +21,7 @@ public class RoomService {
 
     public Room getRoomById(Long id){
         return roomRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Room not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Room was not found with id: " + id));
 
     }
 
