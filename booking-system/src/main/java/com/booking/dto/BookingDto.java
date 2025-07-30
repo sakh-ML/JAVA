@@ -25,5 +25,5 @@ public class BookingDto {
     private BookingStatus status;
     private Date createdAt;
     private Date updatedAt;
-    private Payment payment;
+    private PaymentDto payment;
 }
