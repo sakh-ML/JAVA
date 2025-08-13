@@ -1,4 +1,6 @@
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,18 +9,22 @@ public class OTP{
 		
 		Scanner scanner = new Scanner(System.in);
 		
+		System.out.println("Entext text to encrypt: ");
 		String text = scanner.nextLine();
 
 		System.out.println("Your text is: " + text);
+		String randomKey = generateKey(text.length());
 
-		List<String> resultEncrypted = new ArrayList<String>();
-		resultEncrypted = encrypt(text);
+		System.out.println("Ur random key: " + randomKey);
 
-		System.out.println("The encrypted message is: " + resultEncrypted.get(0) + " the key is: " + resultEncrypted.get(1));
+		//List<String> resultEncrypted = new ArrayList<String>();
+		//resultEncrypted = encrypt(text);
 
-		String decrepteddText = decryptText(resultEncrypted.get(0), resultEncrypted.get(1));
+		//System.out.println("The encrypted message is: " + resultEncrypted.get(0) + " the key is: " + resultEncrypted.get(1));
+
+		//String decrepteddText = decryptText(resultEncrypted.get(0), resultEncrypted.get(1));
 		
-		System.out.println("The decrypted message is: " + decrepteddText);
+		//System.out.println("The decrypted message is: " + decrepteddText);
 
 	}
 
@@ -42,10 +48,16 @@ public class OTP{
 	}
 
 	public static String generateKey(int textSize){
-		String key = "";
+	
+		SecureRandom secureRandom = new SecureRandom();
 
+		//textSize ist anzahl char also anzahl bits, müssen zu bytes umgeanwdelt werden
+		int numberBytes = (textSize / 8);
 
-		return key;
+		byte[] keyBytes = new byte[numberBytes];
+		String randomKey = Base64.getEncoder().encodeToString(keyBytes);
+
+		return randomKey;
 	}
 
 	public static String encrypt(String toEncryptText, String key){
