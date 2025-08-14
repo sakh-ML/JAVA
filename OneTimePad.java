@@ -19,7 +19,7 @@ public class OneTimePad{
 		String text = scanner.nextLine();
 
 		System.out.println("Your text is: " + text);
-		String randomKey = generateKey(stringWithoutSpaces(text).length());
+		String randomKey = generateKey(text);
 
 		System.out.println("Ur random key: " + randomKey);
 
@@ -36,7 +36,7 @@ public class OneTimePad{
 
 	public static List<String> encrypt(String toEncryptText){
 
-		String key = generateKey(stringWithoutSpaces(toEncryptText).length());
+		String key = generateKey(toEncryptText);
 		String encryptedText = encrypt(toEncryptText, key);
 		
 		List<String> result = new ArrayList<String>();
@@ -53,17 +53,22 @@ public class OneTimePad{
 		return decryptedText;
 	}
 
-	public static String generateKey(int textSize){
+	public static String generateKey(String toEncryptText){
 
 		//int index = (int)Math.random() * 100 + 1;
 
 		String result = "";
 		
-		int counter = textSize;
-		while(counter > 0){
+		int counter = 0;
+		while(counter < toEncryptText.length()){
+			if(Character.isWhitespace(toEncryptText.charAt(counter))){
+				result = result.concat(Character.toString(' '));
+				counter++;
+				continue;
+			}
 			int index = getRandomIndex();
 			result = result.concat(Character.toString(allAlphas.charAt(index)));
-			counter--;
+			counter++;
 		}
 	
 		return result;
@@ -88,16 +93,21 @@ public class OneTimePad{
 		return (int)(Math.random() * allAlphas.length() + 1) - 1;
 	}
 
+	/* 
 	public static String stringWithoutSpaces(String txt){
 		String result = "";
 		for(char t : txt.toCharArray()){
 			if(!Character.isWhitespace(t)){
 				result = result.concat(Character.toString(t));
 			}
+			else{
+
+			}
 		}
 		System.out.println("String wihtout any spaces: " + result);
 		return result;
 	}
+		*/
  
 }
 
