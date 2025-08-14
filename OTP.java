@@ -1,19 +1,25 @@
-import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
+//import javax.swing.JFrame;
 
 public class OTP{
+
+	private static final String allAlphas = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 	public static void main(String[] args){
-		
+
+		//JFrame frame = new JFrame("XO");
+
+		//int index = (int)(Math.random() * allAlphas.length() + 1);
+		//System.out.println(allAlphas.length());
+		//System.out.println(index);
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Entext text to encrypt: ");
 		String text = scanner.nextLine();
 
 		System.out.println("Your text is: " + text);
-		String randomKey = generateKey(text.length());
+		String randomKey = generateKey(stringWithoutSpaces(text).length());
 
 		System.out.println("Ur random key: " + randomKey);
 
@@ -30,7 +36,7 @@ public class OTP{
 
 	public static List<String> encrypt(String toEncryptText){
 
-		String key = generateKey(toEncryptText.length());
+		String key = generateKey(stringWithoutSpaces(toEncryptText).length());
 		String encryptedText = encrypt(toEncryptText, key);
 		
 		List<String> result = new ArrayList<String>();
@@ -48,16 +54,19 @@ public class OTP{
 	}
 
 	public static String generateKey(int textSize){
+
+		//int index = (int)Math.random() * 100 + 1;
+
+		String result = "";
+		
+		int counter = textSize;
+		while(counter > 0){
+			int index = getRandomIndex();
+			result = result.concat(Character.toString(allAlphas.charAt(index)));
+			counter--;
+		}
 	
-		SecureRandom secureRandom = new SecureRandom();
-
-		//textSize ist anzahl char also anzahl bits, müssen zu bytes umgeanwdelt werden
-		int numberBytes = (textSize / 8);
-
-		byte[] keyBytes = new byte[numberBytes];
-		String randomKey = Base64.getEncoder().encodeToString(keyBytes);
-
-		return randomKey;
+		return result;
 	}
 
 	public static String encrypt(String toEncryptText, String key){
@@ -74,5 +83,21 @@ public class OTP{
 
 		return result;
 	}
+
+	public static int getRandomIndex(){
+		return (int)(Math.random() * allAlphas.length() + 1) - 1;
+	}
+
+	public static String stringWithoutSpaces(String txt){
+		String result = "";
+		for(char t : txt.toCharArray()){
+			if(!Character.isWhitespace(t)){
+				result = result.concat(Character.toString(t));
+			}
+		}
+		System.out.println("String wihtout any spaces: " + result);
+		return result;
+	}
  
 }
+
