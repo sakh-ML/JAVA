@@ -73,6 +73,11 @@ class FileOrganizingFunctions{
 	public static void moveFileToRightPlace(File f){
 
 		String exct = getFileExtension(f.getName());
+		for (Map.Entry<String, List<String>> entry : OrganaizeFiles.FILE_TYPES.entrySet()){
+			if(entry.getValue().contains(exct)){
+				//ex..
+			}
+		}
 	}
 
 	private static String getFileExtension(String fileName){
