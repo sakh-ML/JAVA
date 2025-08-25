@@ -34,7 +34,7 @@ public class OrganaizeFiles{
 		File[] thingsInDir = FileOrganizingFunctions.getThingsInDir(path);
 
 		for(File f : thingsInDir){
-			FileOrganizingFunctions.moveFileToRightPlace(f);
+			FileOrganizingFunctions.moveFileToRightPlace(f, path);
 		}
 
 	}
@@ -70,12 +70,28 @@ class FileOrganizingFunctions{
 		}
 	}
 
-	public static void moveFileToRightPlace(File f){
+	public static void moveFileToRightPlace(File f, String path){
 
 		String exct = getFileExtension(f.getName());
 		for (Map.Entry<String, List<String>> entry : OrganaizeFiles.FILE_TYPES.entrySet()){
 			if(entry.getValue().contains(exct)){
 				//ex..
+				String folderName = entry.getKey();
+				String folderPath =  path + "/" + folderName;
+				File dir = new File(folderPath);
+
+				System.out.println(dir);
+				if(dir.exists()){
+					//already exists only move the file hier
+				}
+				else if(dir.mkdirs()){
+					// created the dir. now move the file !
+				}
+				else{
+					//error throw error
+				}
+				//System.out.println(f + " has to be in this path: ");
+				//System.out.println(folderToMake);
 			}
 		}
 	}
