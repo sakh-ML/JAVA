@@ -28,22 +28,19 @@ public class Mandelbrot_set {
 
         double real = z1.getReal() + z2.getReal();
         double imaginary = z1.getImaginary() + z2.getImaginary();
-        ComplexNumber z3 = new ComplexNumber(real, imaginary);
-        return z3;
+        return new ComplexNumber(real, imaginary);
     }
     public static ComplexNumber subComplexNumbers(ComplexNumber z1, ComplexNumber z2){
 
         double real = z1.getReal() - z2.getReal();
         double imaginary = z1.getImaginary() - z2.getImaginary();
-        ComplexNumber z3 = new ComplexNumber(real, imaginary);
-        return z3;
+        return new ComplexNumber(real, imaginary);
     }
     public static ComplexNumber mulComplexNumbers(ComplexNumber z1, ComplexNumber z2){
 
         double real = (z1.getReal() * z2.getReal()) - (z1.getImaginary() * z2.getImaginary());
         double imaginary = (z1.getReal() * z2.getImaginary()) + (z1.getImaginary() * z2.getReal());
-        ComplexNumber z3 = new ComplexNumber(real ,imaginary);
-        return z3;
+        return new ComplexNumber(real, imaginary);
     }
 
     public static ComplexNumber squareComplexNumbers(ComplexNumber z){
