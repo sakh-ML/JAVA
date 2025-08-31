@@ -9,14 +9,7 @@ public class RedisFromScratch{
 
         Scanner scanner = new Scanner(System.in);
         while(true){
-            System.out.println("----------------------");
-            System.out.println("Usage: ");
-            System.out.println("SET X Y (Key X wird auf Value Y gebildet)");
-            System.out.println("GET X (Der Value des Key X wird zuruckgeben");
-            System.out.println("DEL X (Key X wird gelöscht)");
-            System.out.println("Type 1 to show the Database");
-            System.out.println("Type exit to end the programm");
-            System.out.println(">");
+            prompt();
             //take the command from the user
             String argumens = scanner.nextLine();
             if(argumens.equals("1")){
@@ -37,6 +30,17 @@ public class RedisFromScratch{
                 }
             }
         }
+    }
+
+    public static void prompt(){
+        System.out.println("----------------------");
+        System.out.println("Usage: ");
+        System.out.println("SET X Y (Key X wird auf Value Y gebildet)");
+        System.out.println("GET X (Der Value des Key X wird zuruckgeben");
+        System.out.println("DEL X (Key X wird gelöscht)");
+        System.out.println("Type 1 to show the Database");
+        System.out.println("Type exit to end the programm");
+        System.out.println(">");
     }
 
     public static void excuteCommand( Redis redis,List<String> command){
@@ -72,8 +76,11 @@ public class RedisFromScratch{
         return false;
     }
 
+    //"SET AGE 31"
     public static List<String> parseCommand(String arguments){
         List<String> result = new ArrayList<String>();
+
+        //String[] result2 = arguments.split(" ");
 
         String toAdd = "";
         for(int i = 0; i < arguments.length(); ++i){
@@ -89,6 +96,12 @@ public class RedisFromScratch{
             result.add(toAdd);
         }
         return result;
+    }
+
+    public static List<String> parseCommand2(String arguments){
+        String[] zwischenErgebnis = arguments.split(" ");
+        List<String> result = Arrays.asList(zwischenErgebnis);
+        return new ArrayList<>(result);
     }
 
 }
